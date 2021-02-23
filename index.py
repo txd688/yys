@@ -1,3 +1,5 @@
+# 1.0 版本 适用于房主
+
 import pyautogui
 import random
 import time
