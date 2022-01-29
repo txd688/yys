@@ -42,7 +42,7 @@ def game_start(num):
     all_num = 0
     n = 1
     while int(n) < num:
-        # 可以根据自己要求进行更改
+        # mouse_click方法可以根据自己要求进行更改
         mouse_click('C:/Users/aaaa/Desktop/mygithub/yys/images/1.PNG',[-50, 50, -10, 10], 1, rand_num(0,1), 0.2, 'left', '挑战坐标：')
             
         mouse_click('C:/Users/aaaa/Desktop/mygithub/yys/images/1.PNG',[-200, 200, -20, 20], 3, rand_num(0,1), 0.2, 'left', '胜利坐标：')
