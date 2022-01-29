@@ -1,27 +1,75 @@
-# 1.0 版本 适用于房主
 
 import pyautogui
 import random
 import time
 
-# 这是作为房主有个'挑战'按钮事件
 
-# 产生随机数
-def randNum(x, y):
+# 随机数
+def rand_num(x, y):
     return round(random.uniform(x, y),3);
 
-n = 0;
+# 判断是否为数字
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        pass
+ 
+    try:
+        import unicodedata
+        unicodedata.numeric(s)
+        return True
+    except (TypeError, ValueError):
+        pass
+ 
+    return False
 
-while True:
-    # 点击挑战按钮,有两个坐标分别为x(randNum(1320,1377))和y(randNum(1320,1377))，可以自由设置。
-    pyautogui.click(x=randNum(1320,1377), y=randNum(720,778), clicks=1, interval=randNum(1,4), button='left', duration=randNum(1,3), tween=pyautogui.linear);
-    # 随机游戏时间，我的设置在15s-28s之间。可以自由设置
-    time.sleep(randNum(15,28));
-    # 这是游戏结束后的动画，连点3下(如果不需要可以去掉)
-    pyautogui.click(x=randNum(100,1377), y=randNum(80,300), clicks=3, interval=randNum(1,3), button='left', duration=randNum(1,3), tween=pyautogui.linear);
-    # 这是点击屏幕继续的页面，返回到主页
-    pyautogui.click(x=randNum(100,1377), y=randNum(80,600), clicks=1, interval=randNum(1,3), button='left', duration=randNum(1,3), tween=pyautogui.linear);
-    n += 1;
-    print(n);
-    time.sleep(randNum(1,3));
+# 位置，偏移量，点击次数，时间间隔，鼠标移动持续时间，按键
+def mouse_click(img, offset, click_number, interval, duration, keydown, des, n = False):
+    loc = pyautogui.locateCenterOnScreen(img, confidence = 0.9)
+    if des:
+        print(des + str(loc))
+    if loc is not None:
+        loc2 = [int(loc.x) + rand_num(offset[0], offset[1]), int(loc.y) + rand_num(offset[2], offset[3])]
+        pyautogui.click(loc2[0], loc2[1], clicks = click_number, interval = interval, duration = duration, button = keydown)
+        if n :
+            return n + 1
+    
+
+def game_start(num):
+    num = int(num)
+    all_num = 0
+    n = 1
+    while int(n) < num:
+
+        mouse_click('C:/Users/aaaa/Desktop/mygithub/yys/images/1.PNG',[-50, 50, -10, 10], 1, rand_num(0,1), 0.2, 'left', '挑战坐标：')
+            
+        mouse_click('C:/Users/aaaa/Desktop/mygithub/yys/images/1.PNG',[-200, 200, -20, 20], 3, rand_num(0,1), 0.2, 'left', '胜利坐标：')
+
+        n = mouse_click('C:/Users/aaaa/Desktop/mygithub/yys/images/1.PNG',[-250, 250, -100, 100], 1, rand_num(0,1), 0.2, 'left', '结束坐标：', n)
+        
+        print('成功执行{}次'.format(str(n - 1)))
+
+        all_num += 1
+
+        if(all_num > 100):
+            
+            print('一直未找到坐标，程序将取消执行!')
+
+            break
+
+        time.sleep(rand_num(4,6))
+
+if __name__ == "__main__":
+    game_number= input('请输入执行次数：\n')
+    
+    if is_number(game_number):
+        
+        num = game_number
+
+    else:
+        num = 999999999
+    
+    game_start(num)
    

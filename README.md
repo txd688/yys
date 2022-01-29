@@ -1,23 +1,12 @@
 ## 阴阳师自动刷魂土脚本
+
 使用指南  
 
-
 python  
-库:  
-pip3 install pillow  
-pip3 install pyautogui  
-pip install opencv-python  
+库:
+pip3 install pyautogui
+pip3 install pyinstaller
 
-#### 逻辑步骤
-以下是基于手动操作过一次，已实现自动进入房间以后
+#### 打包命令
 
-作为房主的操作：
-* 点击开始按钮(按钮内部随机位置)
-* 挖土结束后，需要点击三次跳过动画(内部随机位置)
-* 出现奖励后，点击一次结束挖土(内部随机位置)
-这三步都基于检测的指定图片是否出现
-
-作为成员的操作：
-* 挖土结束后，需要点击三次跳过动画(内部随机位置)
-* 出现奖励后，点击一次结束挖土(内部随机位置)
-这三步都基于检测的指定图片是否出现
+pyinstaller -F index.py
